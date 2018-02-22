@@ -4,5 +4,6 @@
 std::string getstring();
 char * convert(std::string input);
 void printWithSpace(std::string s);
+double cosit(std::string s);
 //const char * space;
 #endif 

@@ -3,12 +3,21 @@
 #include <ncurses.h>
 #include <cstring>
 #include "quest.h"
-
+#include <math.h>
 using namespace std;
 
 // Utility functions.
 
 const char * space = "\n";
+
+double cosit(string s) {
+  double a = 0;
+  std::string::size_type sz;
+  a = std::stod (s,&sz);
+  a = cos(a);
+  return a;
+}
+
 
 void printWithSpace(string s) {
   printw(strcat(convert(s),space));
@@ -19,6 +28,9 @@ char * convert(string input){
   std::strcpy(x,input.c_str());
   return x;
 }
+
+
+
 
 std::string getstring()
 {
