@@ -5,6 +5,9 @@
 #include <math.h>
 #include <cstring>
 #include "quest.h"
+#include "screen.h"
+
+
 
 //DUMMY TEST PROGRAME FOR KEVIN
 
@@ -13,7 +16,7 @@ using namespace std;
 int main() {
 
   list <string> SS;
-  
+openNetwork();
   // Playing around with pointers.
   string input="";
   string *ip;
@@ -24,6 +27,7 @@ int main() {
   printw("*** Kevin's Dumb C++ ***\n");
   printw("please enter some txt: ");
   
+  renderScreen();
   input = getstring();
   if (std::string::npos != input.find_first_of("0123456789")) {
 
@@ -41,7 +45,6 @@ int main() {
   refresh();
   cout << &input << endl;
   cout << *ip << endl;
-  getch();
   endwin();
 
 }
