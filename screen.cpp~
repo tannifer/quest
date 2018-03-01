@@ -1,0 +1,77 @@
+#include <iostream>
+#include <ncurses.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#define PORT 3000
+
+// File for rendering a window.
+
+void renderScreen() {
+
+  initscr();
+  int nline =40;
+  int ncols =40;
+  int x=20;
+  int y=20;
+  // Varible for storing character key.
+  int ch;
+  WINDOW * win = newwin(nline,ncols,y,x);
+  waddch(win,'X' | COLOR_PAIR(2));
+  while (ch !=97) {
+    //box(win,0,y);
+    ch = wgetch(win);
+    if (ch == 98) {
+      x++;
+      y++;
+      printw("Left arrow was proessed");
+      mvprintw(x,y, "HELLO");
+      refresh();
+      erase();
+      //wrefresh(win);
+      
+    }
+  }
+  refresh();
+  clear();
+  printw("LETS ENTER SOME DATA: ");
+  endwin();
+
+}
+
+
+void openNetwork() {
+  int sd, new_socket, valread;
+  int opt =1;
+  struct sockaddr_in server;
+  
+  server.sin_family = AF_INET;
+  server.sin_port = htons(PORT);
+  server.sin_addr.s_addr = INADDR_ANY;
+  // Creating socket file descriptor
+  if ((sd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
+    {
+      perror("socket failed");
+      exit(EXIT_FAILURE);
+    }
+
+  if (setsockopt(sd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,&opt, sizeof(opt)))
+    {
+      perror("setsockopt");
+      exit(EXIT_FAILURE);
+    }
+  
+  if (bind(sd, (struct sockaddr *)&server,sizeof(server))<0)
+    {
+      perror("bind failed");
+      exit(EXIT_FAILURE);
+    }
+  if (listen(sd, 3) < 0)
+    {
+      perror("listen");
+      exit(EXIT_FAILURE);
+    }
+
+  
+  
+}
