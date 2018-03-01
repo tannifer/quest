@@ -6,7 +6,7 @@
 #include <cstring>
 #include "quest.h"
 #include "screen.h"
-
+#include "net.h"
 
 
 //DUMMY TEST PROGRAME FOR KEVIN
